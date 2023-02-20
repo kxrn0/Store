@@ -1,0 +1,11 @@
+extends layout
+block content
+	if store_customer
+		p= `Welcome, ${store_customer}`
+	else
+		ul
+			li
+				a(href="/login") Log In
+			li
+				a(href="/signup") Sign Up
+		

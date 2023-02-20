@@ -1,13 +1,5 @@
 extends layout
-
 block content
-	nav
-		a(href="/") Home
-		if username
-			a(href="/add_item") Add Item
-		if username
-			a(href="get_credits") Get Credits
-		a(href="/account") Account
 	each category in categories
 		div.category
 			a(href=`/categories/${category.name}`)

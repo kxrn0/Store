@@ -1,7 +1,11 @@
+include navbar.pug
+
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		title= title
+		link(rel="stylesheet", href="/stylesheets/reset.css")
+		link(rel="stylesheet", href="/stylesheets/style.css")
+	body
+		+navbar
+		block content
