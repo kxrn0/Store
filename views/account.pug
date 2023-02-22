@@ -2,6 +2,7 @@ extends layout
 block content
 	if store_customer
 		p= `Welcome, ${store_customer}`
+		a(href="/logout") log out
 	else
 		ul
 			li

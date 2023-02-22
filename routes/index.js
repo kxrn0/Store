@@ -4,13 +4,19 @@ const Category = require("../models/category");
 
 /* GET home page. */
 router.get("/", async (req, res, next) => {
-	const categories = await Category.find({});
+	const categories = await Category.find({}, "name background");
+	const catData = categories.map((cat) => {
+		const base64 = Buffer.from(cat.background.data).toString("base64");
 
-	console.log("categories:");
-	console.log(categories);
-	console.log("---------------");
+		return {
+			name: cat.name,
+			background: `data:${cat.background.contentType};base64,${base64}`,
+			url: cat.url
+		};
+	});
+
 	res.render("index", {
-		categories,
+		categories: catData,
 		store_customer: req.cookies.store_customer,
 	});
 });
