@@ -1,0 +1,11 @@
+extends layout
+block content
+	div.item
+		img(src=item.thumbnail)
+		if !item.purchased
+			p= item.price
+	a(href=`/item/${item.id}/full`)
+		if item.purchased
+			span.purchased See Item
+		else
+			span.not-purchased Buy Item

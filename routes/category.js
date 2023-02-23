@@ -3,6 +3,7 @@ const router = express.Router();
 const categoryController = require("../controllers/category");
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
+const binary_to_image = require("../utilities/binary_to_image");
 const Category = require("../models/category");
 const Item = require("../models/item");
 
@@ -20,19 +21,6 @@ router.post(
 	categoryController.add_post
 );
 
-router.get("/:id", async (req, res, next) => {
-	const [category, items] = await Promise.all([
-		Category.findById(req.params.id),
-		Item.find({ category: req.params.id }),
-	]);
-
-	console.log("category:");
-	console.log(category);
-	console.log("items:");
-	console.log(items);
-
-	//res.send("hi");
-	res.render("category", { category, items });
-});
+router.get("/:id", categoryController.get_category);
 
 module.exports = router;

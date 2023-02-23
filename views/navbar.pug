@@ -1,11 +1,13 @@
 mixin navbar
 	nav.navbar
+		if credits
+			p= `credits: ${credits}`
 		ul
 			li
 				a(href="/") Home
 			li
 				a(href="/categories/add") Add
 			li
-				a(href="/get_tokens") Get Tokens
+				a(href="/get_credits") Get Credits
 			li
 				a(href="/account") Account

@@ -1,8 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const binary_to_image = require("../utilities/binary_to_image");
+const customerController = require("../controllers/customer");
+const Customer = require("../models/customer");
+const Item = require("../models/item");
 
-router.get("/", (req, res, next) => {
-	res.render("account", { store_customer: req.cookies.store_customer });
-});
+router.get("/", customerController.account);
+
+router.post("/", customerController.update_account)
+
+router.get("/login", customerController.get_log_in);
+
+router.post("/login", customerController.post_log_in);
+
+router.get("/signup", customerController.get_sign_up);
+
+router.post("/signup", customerController.post_sign_up);
+
+router.get("/logout", customerController.log_out);
 
 module.exports = router;

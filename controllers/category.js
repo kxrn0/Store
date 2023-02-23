@@ -1,6 +1,7 @@
 const binary_to_image = require("../utilities/binary_to_image");
 const Customer = require("../models/customer");
 const Category = require("../models/category");
+const Item = require("../models/item");
 
 exports.page = async (req, res, next) => {
 	const categories = await Category.find({}, "name background").sort({
@@ -17,7 +18,7 @@ exports.page = async (req, res, next) => {
 
 	res.render("index", {
 		categories: catData,
-		store_customer: req.cookies.store_customer,
+		credits: req.cookies.credits,
 	});
 };
 
@@ -56,4 +57,35 @@ exports.add_post = async (req, res, next) => {
 	} catch (error) {
 		next(error);
 	}
+};
+
+exports.get_category = async (req, res, next) => {
+	const [category, items] = await Promise.all([
+		Category.findById(req.params.id),
+		Item.find({ category: req.params.id }, "price thumbnail").sort({
+			creationDate: 1,
+		}),
+	]);
+
+	const catData = {
+		name: category.name,
+		background: binary_to_image(
+			category.background.data,
+			category.background.contentType
+		),
+	};
+	const itemData = items.map((item) => ({
+		price: item.price,
+		thumbnail: binary_to_image(
+			item.thumbnail.data,
+			item.thumbnail.contentType
+		),
+		id: item._id,
+	}));
+
+	res.render("category", {
+		category: catData,
+		items: itemData,
+		credits: req.cookies.credits,
+	});
 };

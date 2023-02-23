@@ -8,4 +8,8 @@ router.get("/add", itemController.add_get);
 
 router.post("/add", upload.single("content"), itemController.add_post);
 
+router.get("/:id", itemController.page);
+
+router.get("/:id/full", itemController.full);
+
 module.exports = router;

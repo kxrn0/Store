@@ -1,4 +1,10 @@
 extends layout
-bock content
+block content
 	h1= category.name
-	
+	img(src=category.background)
+	ul
+		each item in items
+			li
+				a(href=`/item/${item.id}`)
+					img(src=item.thumbnail)
+					p= item.price

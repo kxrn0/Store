@@ -1,12 +1,25 @@
 extends layout
 block content
-	if store_customer
-		p= `Welcome, ${store_customer}`
-		a(href="/logout") log out
-	else
-		ul
+	h1= `Welcome, ${customer.name.split(" ")[0]}`
+	p= `Credits: ${customer.credits}`
+	form(action="", method="POST")
+		p= errors
+		label(for="name")
+			span Name:
+			input(type="text", name="name", value=customer.name)
+		label(for="password")
+			span Password:
+			input(type="password", name="password")
+		div.new-password
+			label(for="new-password")
+				span New Password:
+				input(type="password", name="new-password")
+		button Update Credentials
+
+	a(href="/account/logout") Log Out
+	h3 Purchased Items
+	ul
+		each item in items
 			li
-				a(href="/login") Log In
-			li
-				a(href="/signup") Sign Up
-		
+				a(href=`/item/${item.id}/full`)
+					img(src=item.thumbnail)
