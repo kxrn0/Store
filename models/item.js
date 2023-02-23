@@ -6,3 +6,5 @@ const itemSchema = mongoose.Schema({
 	image: { data: Buffer, contentType: String },
 	creationDate: { type: Date, default: Date.now },
 });
+
+module.exports = mongoose.model("Item", itemSchema)

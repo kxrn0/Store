@@ -2,7 +2,7 @@ extends layout
 block content
 	if errors
 		p= errors
-	form(action="/add_category", method="POST", enctype="multipart/form-data")
+	form(action="", method="POST", enctype="multipart/form-data")
 		input(type="file", name="background")
 		input(type="text", placeholder="Category Name", name="name")
 		input(type="password", placeholder="password", name="password")

@@ -1,0 +1,12 @@
+extends layout
+block content
+	if errors
+		p= errors
+	form(action="", method="POST", enctype="multipart/form-data")
+		input(type="file", name="content")
+		select(name="category")
+			each category in categories
+				option(value=category._id)= category.name
+		input(type="number", placeholder="Price", name="price")
+		input(type="password", placeholder="password", name="password")
+		button Submit
