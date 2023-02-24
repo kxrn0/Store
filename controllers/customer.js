@@ -128,6 +128,21 @@ exports.post_sign_up = async (req, res, next) => {
 	}
 };
 
+exports.get_credits = (req, res, next) => {
+	if (!req.cookies.store_customer) {
+		const message =
+			"You need to be logged in to access this place.";
+
+		return res.redirect(`/login?errors=${encodeURIComponent}`);
+	}
+
+	res.render("get_credits");
+};
+
+exports.post_credits = async (req, res, next) => {
+	
+}
+
 exports.log_out = (req, res, next) => {
 	res.clearCookie("store_customer");
 	res.clearCookie("credits");
