@@ -2,6 +2,6 @@ extends layout
 block content
 	each category in categories
 		div.category
-			a(href=`${category.url}`)
+			a(href=`/categories/${category.id}`)
 				img(src=category.background)
 				p= category.name

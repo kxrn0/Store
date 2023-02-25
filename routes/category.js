@@ -9,9 +9,7 @@ const Item = require("../models/item");
 
 router.get("/", categoryController.page);
 
-router.get("/add", (req, res, next) => {
-	res.render("add");
-});
+router.get("/add", categoryController.home_add);
 
 router.get("/category/add", categoryController.add_get);
 
@@ -20,6 +18,10 @@ router.post(
 	upload.single("background"),
 	categoryController.add_post
 );
+
+router.get("/delete/:id", categoryController.get_delete_category);
+
+router.post("/delete/:id", categoryController.post_delete_category);
 
 router.get("/:id", categoryController.get_category);
 

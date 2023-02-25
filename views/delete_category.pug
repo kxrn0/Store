@@ -1,0 +1,17 @@
+extends layout
+block content
+	if errors
+		p= errors
+	if items.length
+		p Please delete the following items before deleting this category:
+		ul
+			each item in items
+				li
+					a(href=`/item/${item.id}`)
+						img(src=item.src)
+	else
+		p Do you really wish to delete this category?
+		a(href="/") No
+		form(action="", method="POST")
+			input(type="password", name="password", placeholder="password")
+			button Yes

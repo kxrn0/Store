@@ -2,9 +2,13 @@ extends layout
 block content
 	h1= category.name
 	img(src=category.background)
-	ul
-		each item in items
-			li
-				a(href=`/item/${item.id}`)
-					img(src=item.thumbnail)
-					p= item.price
+	if items.length
+		ul
+			each item in items
+				li
+					a(href=`/item/${item.id}`)
+						img(src=item.thumbnail)
+						p= item.price
+	else
+		p No items in this category yet
+	a(href=`/categories/delete/${category.id}`) Delete Category

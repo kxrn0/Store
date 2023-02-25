@@ -12,4 +12,8 @@ router.get("/:id", itemController.page);
 
 router.get("/:id/full", itemController.full);
 
+router.get("/delete/:id", itemController.get_delete_item);
+
+router.post("/delete/:id", itemController.post_delete_item);
+
 module.exports = router;

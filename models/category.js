@@ -5,8 +5,4 @@ const categorySchema = mongoose.Schema({
 	creationDate: { type: Date, default: Date.now },
 });
 
-categorySchema.virtual("url").get(function () {
-	return `/categories/${this._id}`;
-});
-
 module.exports = mongoose.model("Category", categorySchema);

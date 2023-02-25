@@ -6,6 +6,17 @@ const Customer = require("../models/customer");
 
 exports.add_get = async (req, res, next) => {
 	try {
+		if (!req.cookies.store_customer) {
+			const message =
+				"You need to be logged in to add items.";
+
+			return res.redirect(
+				`/account/login?errors=${encodeURIComponent(
+					message
+				)}`
+			);
+		}
+
 		const categories = await Category.find({}, "name _id");
 
 		res.render("add_item", {
@@ -122,6 +133,45 @@ exports.full = async (req, res, next) => {
 				credits: purchased ? req.cookies.credits : subs,
 			});
 		} else res.render("insufficient");
+	} catch (error) {
+		next(error);
+	}
+};
+
+exports.get_delete_item = async (req, res, next) => {
+	res.render("delete_item", { errors: req.query.errors });
+};
+
+exports.post_delete_item = async (req, res, next) => {
+	const password = req.body.password;
+
+	if (password !== process.env.PASSWORD_OF_CREATION) {
+		const message = "Wrong Password.";
+
+		return res.redirect(
+			`/item/delete/${
+				req.params.id
+			}?errors=${encodeURIComponent(message)}`
+		);
+	}
+
+	try {
+		const customers = await Customer.find({ items: req.params.id });
+
+		customers.forEach(
+			(customer) =>
+				(customer.items = customer.items.filter(
+					(item) =>
+						item.toString() !==
+						req.params.id
+				))
+		);
+
+		await Promise.all(customers.map((customer) => customer.save()));
+
+		await Item.findByIdAndDelete(req.params.id);
+
+		res.redirect("/");
 	} catch (error) {
 		next(error);
 	}

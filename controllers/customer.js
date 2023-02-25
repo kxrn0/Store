@@ -1,22 +1,27 @@
 const binary_to_image = require("../utilities/binary_to_image");
+const random = require("../utilities/random");
 const bcrypt = require("bcrypt");
 const Customer = require("../models/customer");
 
 exports.account = async (req, res, next) => {
 	if (!req.cookies.store_customer) return res.render("not_logged_in");
 
-	const customer = await Customer.findOne({
-		name: req.cookies.store_customer,
-	}).populate("items", "thumbnail");
-	const thumbData = customer.items.map((item) => ({
-		thumbnail: binary_to_image(
-			item.thumbnail.data,
-			item.thumbnail.contentType
-		),
-		id: item._id,
-	}));
+	try {
+		const customer = await Customer.findOne({
+			name: req.cookies.store_customer,
+		}).populate("items", "thumbnail");
+		const thumbData = customer.items.map((item) => ({
+			thumbnail: binary_to_image(
+				item.thumbnail.data,
+				item.thumbnail.contentType
+			),
+			id: item._id,
+		}));
 
-	res.render("account", { customer, items: thumbData });
+		res.render("account", { customer, items: thumbData });
+	} catch (error) {
+		next(error);
+	}
 };
 
 exports.update_account = async (req, res, next) => {
@@ -72,7 +77,7 @@ exports.post_log_in = async (req, res, next) => {
 				"Username not found in the database, please sign up to continue.";
 
 			return res.redirect(
-				`?errors=${encodeURIComponent(message)}`
+				`/account/signup?errors=${encodeURIComponent(message)}`
 			);
 		}
 
@@ -133,15 +138,33 @@ exports.get_credits = (req, res, next) => {
 		const message =
 			"You need to be logged in to access this place.";
 
-		return res.redirect(`/login?errors=${encodeURIComponent}`);
+		return res.redirect(`/account/login?errors=${encodeURIComponent(message)}`);
 	}
 
-	res.render("get_credits");
+	res.render("get_credits", { credits: req.cookies.credits });
 };
 
 exports.post_credits = async (req, res, next) => {
-	
-}
+	try {
+		const customer = await Customer.findOne({
+			name: req.cookies.store_customer,
+		});
+		const credits = random(0, 25);
+
+		customer.credits += credits;
+		await customer.save();
+
+		console.log(`GOT ${credits} CREDITS!`);
+
+		res.cookie("credits", customer.credits);
+		res.render("credits_page", {
+			credits: customer.credits,
+			wonCredits: credits,
+		});
+	} catch (error) {
+		next(error);
+	}
+};
 
 exports.log_out = (req, res, next) => {
 	res.clearCookie("store_customer");

@@ -19,7 +19,7 @@ router.post("/signup", customerController.post_sign_up);
 
 router.get("/get_credits", customerController.get_credits);
 
-router.post("/get_credits", customerControll.post_credits);
+router.post("/get_credits", customerController.post_credits);
 
 router.get("/logout", customerController.log_out);
 

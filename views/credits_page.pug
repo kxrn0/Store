@@ -1,0 +1,4 @@
+extends layout
+block content
+	p= `You've won ${wonCredits} credit${wonCredits === 1 ? "" : "s"}!`
+	a(href="/account/get_credits") Get More Credits!
