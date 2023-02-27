@@ -1,0 +1,14 @@
+.insufficient {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+}
+
+.insufficient h1 {
+	background: #efde32;
+	color: red;
+	font-size: 3rem;
+	padding: 1rem;
+	border-radius: 5px;
+}

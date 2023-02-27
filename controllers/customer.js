@@ -42,7 +42,10 @@ exports.update_account = async (req, res, next) => {
 			password,
 			customer.hash
 		);
-		let message;
+		let alert, errors;
+
+		alert = null;
+		errors = null;
 
 		if (passwordMatch) {
 			const newHash = await bcrypt.hash(newPassword, 12);
@@ -50,12 +53,17 @@ exports.update_account = async (req, res, next) => {
 			customer.name = name;
 			customer.hash = newHash;
 			res.cookie("store_customer", name);
-			errors = "Credentials updated successfully.";
+			alert = "Credentials updated successfully.";
 
 			await customer.save();
 		} else errors = "Wrong password, please try again.";
 
-		res.render("account", { customer, items: thumbData, errors });
+		res.render("account", {
+			customer,
+			items: thumbData,
+			errors,
+			alert,
+		});
 	} catch (error) {
 		next(error);
 	}
@@ -77,7 +85,9 @@ exports.post_log_in = async (req, res, next) => {
 				"Username not found in the database, please sign up to continue.";
 
 			return res.redirect(
-				`/account/signup?errors=${encodeURIComponent(message)}`
+				`/account/signup?errors=${encodeURIComponent(
+					message
+				)}`
 			);
 		}
 
@@ -138,7 +148,9 @@ exports.get_credits = (req, res, next) => {
 		const message =
 			"You need to be logged in to access this place.";
 
-		return res.redirect(`/account/login?errors=${encodeURIComponent(message)}`);
+		return res.redirect(
+			`/account/login?errors=${encodeURIComponent(message)}`
+		);
 	}
 
 	res.render("get_credits", { credits: req.cookies.credits });

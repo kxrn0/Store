@@ -57,8 +57,6 @@ function create_category(categoryName) {
 						`ERROR CREATING CATEGORY: ${error}`
 					);
 
-				console.log(data);
-
 				const category = new Category({
 					name: categoryName.split("_").join(" "),
 					background: {

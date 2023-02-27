@@ -1,9 +1,10 @@
 extends layout
 block content
-	if errors
-		p= errors
-	p Do you really wish to delete this item?
-	a(href="/") No
-	form(action="", method="POST")
-		input(type="password", name="password", placeholder="password")
-		button Yes
+	div.delete-item
+		if errors
+			p.errors= errors
+		p.message Do you really wish to delete this item?
+		a.no(href="/") No
+		form(action="", method="POST")
+			input(type="password", name="password", placeholder="password")
+			button Yes

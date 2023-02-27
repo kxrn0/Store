@@ -67,7 +67,7 @@ exports.page = async (req, res, next) => {
 			const message = "Please log in to continue";
 
 			return res.redirect(
-				`../login?errors=${encodeURIComponent(message)}`
+				`/account/login?errors=${encodeURIComponent(message)}`
 			);
 		}
 		const customer = await Customer.findOne(

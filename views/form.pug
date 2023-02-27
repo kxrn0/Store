@@ -1,14 +1,15 @@
 extends layout
 block content
-	h1= title
-	if errors
-		p= errors
-	form(method="POST", action="")
-		label(for="name")
-			span Name :
-			input(type="text", name="name")
-		label(for="password")
-			span Password :
-			input(type="password", name="password")
-		button Submit
+	div.main-form
+		h1= title
+		if errors
+			p.errors= errors
+		form(method="POST", action="")
+			label(for="name")
+				span Name :
+				input(type="text", name="name", required)
+			label(for="password")
+				span Password :
+				input(type="password", name="password", required)
+			button Submit
 

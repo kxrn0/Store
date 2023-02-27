@@ -1,4 +1,5 @@
 include navbar.pug
+include footer.pug
 
 doctype html
 html
@@ -6,6 +7,23 @@ html
 		title= title
 		link(rel="stylesheet", href="/stylesheets/reset.css")
 		link(rel="stylesheet", href="/stylesheets/style.css")
+		link(rel="stylesheet", href="/stylesheets/index.css")
+		link(rel="stylesheet", href="/stylesheets/account.css")
+		link(rel="stylesheet", href="/stylesheets/nav.css")
+		link(rel="stylesheet", href="/stylesheets/full.css")
+		link(rel="stylesheet", href="/stylesheets/addition.css")
+		link(rel="stylesheet", href="/stylesheets/won.css")
+		link(rel="stylesheet", href="/stylesheets/category.css")
+		link(rel="stylesheet", href="/stylesheets/item.css")
+		link(rel="stylesheet", href="/stylesheets/insufficient.css")
+		link(rel="stylesheet", href="/stylesheets/main_form.css")
+		link(rel="stylesheet", href="/stylesheets/delete_item.css")
+		link(rel="stylesheet", href="/stylesheets/delete_category.css")
+		script(src="/javascripts/download.js")
+
+		meta(name='viewport', content='width=device-width, initial-scale=1')
 	body
 		+navbar
-		block content
+		main
+			block content
+		+footer

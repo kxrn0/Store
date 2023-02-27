@@ -1,25 +1,28 @@
 extends layout
 block content
-	h1= `Welcome, ${customer.name.split(" ")[0]}`
-	p= `Credits: ${customer.credits}`
-	form(action="", method="POST")
-		p= errors
-		label(for="name")
-			span Name:
-			input(type="text", name="name", value=customer.name)
-		label(for="password")
-			span Password:
-			input(type="password", name="password")
-		div.new-password
-			label(for="new-password")
-				span New Password:
-				input(type="password", name="new-password")
-		button Update Credentials
-
-	a(href="/account/logout") Log Out
-	h3 Purchased Items
-	ul
-		each item in items
-			li
-				a(href=`/item/${item.id}/full`)
-					img(src=item.thumbnail)
+	div.account
+		div.container
+			h1= `Welcome, ${customer.name.split(" ")[0]}`
+			p= `Credits: ${customer.credits}`
+			form(action="", method="POST")
+				if errors
+					p.errors= errors
+				if alert
+					p.alert= alert
+				label(for="name")
+					span Name:
+					input(type="text", name="name", value=customer.name)
+				label(for="password")
+					span Password:
+					input(type="password", name="password")
+				label(for="new-password")
+					span New Password:
+					input(type="password", name="new-password")
+				button Update Credentials
+			a(href="/account/logout").log-out Log Out
+		h3 Purchased Items
+		ul
+			each item in items
+				li
+					a(href=`/item/${item.id}/full`)
+						img(src=item.thumbnail)

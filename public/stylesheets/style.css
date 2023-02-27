@@ -1,11 +1,54 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
 
+body > main {
+	flex-grow: 1;
+	background: #87cefe;
+	display: grid;
+	place-items: center;
+	padding: 3rem;
+}
 
-img {
-	width: 400px;
+body > footer {
+	background: #faeaba;
+	padding: 1rem;
+	text-align: center;
+}
+
+.errors, .alert {
+	max-width: 300px;
+	padding: .5rem;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.errors {
+	background: #ff5782;
+	color: azure;
+}
+
+.alert {
+	background: yellow;
+	color: black;
+}
+
+.get-credits-element {
+	background: #fe45de;
+	text-decoration: none;
+	font-size: 3rem;
+	color: azure;
+	padding: 1rem;
+	border: none;
+	border-radius: 10px;
 }

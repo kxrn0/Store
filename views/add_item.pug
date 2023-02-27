@@ -1,12 +1,13 @@
 extends layout
 block content
-	if errors
-		p= errors
-	form(action="", method="POST", enctype="multipart/form-data")
-		input(type="file", name="content")
-		select(name="category")
-			each category in categories
-				option(value=category._id)= category.name
-		input(type="number", placeholder="Price", name="price")
-		input(type="password", placeholder="password", name="password")
-		button Submit
+	div.add-form
+		if errors
+			p.errors= errors
+		form(action="", method="POST", enctype="multipart/form-data")
+			input(type="file", name="content", required)
+			select(name="category", required)
+				each category in categories
+					option(value=category._id)= `${category.name[0].toUpperCase()}${category.name.slice(1)}`
+			input(type="number", placeholder="Price", name="price", required)
+			input(type="password", placeholder="password", name="password", required)
+			button Submit

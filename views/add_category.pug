@@ -1,9 +1,10 @@
 extends layout
 block content
-	if errors
-		p= errors
-	form(action="", method="POST", enctype="multipart/form-data")
-		input(type="file", name="background")
-		input(type="text", placeholder="Category Name", name="name")
-		input(type="password", placeholder="password", name="password")
-		button Submit
+	div.add-form
+		if errors
+			p.errors= errors
+		form(action="", method="POST", enctype="multipart/form-data")
+			input(type="file", name="background", required)
+			input(type="text", placeholder="Category Name", name="name", required)
+			input(type="password", placeholder="password", name="password", required)
+			button Submit

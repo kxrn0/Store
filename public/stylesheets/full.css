@@ -1,0 +1,20 @@
+.full {
+	position: relative;
+}
+
+.full img {
+	max-width: calc(100vw - 6rem);
+	max-height: calc(100vh - 12rem);
+}
+
+.full button {
+	background: #dfeeffcf;
+	color: black;
+	font-size: 1.05rem;
+	padding: .5rem;
+	border: none;
+	border-radius: 5px;
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+}

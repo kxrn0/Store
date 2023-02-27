@@ -1,0 +1,31 @@
+.item {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.item .container {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.item .links {
+	display: flex;
+	justify-content: space-between;
+}
+
+.item .links a {
+	color: #892132;
+	padding: 1rem;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+.item .links a.see-item {
+	background: #34ffef;
+}
+
+.item .links a.delete-item {
+	background: #fe85b9;
+}

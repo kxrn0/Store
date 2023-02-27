@@ -1,0 +1,23 @@
+.won-credits {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: center;
+}
+
+.won-credits p {
+	background: #fefe79;
+	color: #ef39de;
+	font-size: 3rem;
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+.won-credits a {
+	background: #defaef;
+	color: gray;
+	width: fit-content;
+	padding: 1rem;
+	border-radius: 5px;
+	text-decoration: none;
+}
